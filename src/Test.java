@@ -4,7 +4,7 @@ public class Test
 {
 
     public static void main(String[] args) {
-        System.out.println("Free memory: "+ Runtime.getRuntime().freeMemory());
+        System.out.println("Available memory: "+ Runtime.getRuntime().freeMemory());
         long l = System.currentTimeMillis();
         Collection c = new Collection("C:\\dict");
         SPIMI s = new SPIMI(c.getCollection());
