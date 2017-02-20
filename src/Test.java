@@ -13,7 +13,7 @@ public class Test
       Merge m = new Merge("C:\\blocks");
         long l3 = System.currentTimeMillis();
         System.out.println("Merged: "+(l2-l3));
-        System.out.println("Total time: "+(l-l3));
+    
 
     }
 }
