@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.*;
 
@@ -17,7 +20,7 @@ public class CompressIndex {
         comIndex = new HashMap<>();
     }
 
-    void encodeArray(){
+    HashMap<String,byte[]> encodeInd(){
         for(Map.Entry<String,ArrayList<Integer>> entry : sortedMap.entrySet()) {
             ArrayList<Integer> temp = entry.getValue();
             ArrayList<Integer> dec = new ArrayList<>();
@@ -27,6 +30,7 @@ public class CompressIndex {
             }
             comIndex.put(entry.getKey(),encode(dec));
         }
+        return comIndex;
     }
 
 
@@ -70,5 +74,21 @@ public class CompressIndex {
             }
         }
         return numbers;
+    }
+
+    void writeFile() throws IOException {//sort and writes result in file
+        long n = System.currentTimeMillis();
+        FileWriter filewriter = new FileWriter(new File(+n+".txt"));
+        for(Map.Entry<String,byte[]> entry : comIndex.entrySet()) {
+            String key = entry.getKey();
+            byte[] val = entry.getValue();
+            String s = key+" ";
+            for (byte i:
+                    val) {
+                s+=i;
+            }
+            filewriter.write(s+"\n");
+        }
+        filewriter.close();
     }
 }

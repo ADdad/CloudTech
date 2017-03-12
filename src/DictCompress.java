@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -104,5 +107,14 @@ public class DictCompress {
             }
         }
         return res.split(" ");
+    }
+
+    void writeFile() throws IOException {//sort and writes result in file
+        long n = System.currentTimeMillis();
+        FileWriter filewriter = new FileWriter(new File(+n+".txt"));
+        for(String s : compressed) {
+            filewriter.write(s+"\n");
+        }
+        filewriter.close();
     }
 }
