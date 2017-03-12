@@ -6,18 +6,18 @@ import java.util.*;
 public class DictCompress {
     int block_size = 4;
     SortedMap<String, ArrayList<Integer>> sortedMap;
-    ArrayList<String> compressed;
+    private ArrayList<String> compressed, decompressed;
     char key = 126;
 
-    DictCompress(HashMap<String, ArrayList<Integer>> dict){
-        sortedMap = new TreeMap();
-        sortedMap.putAll(dict);
-    }
     DictCompress(){
+        compressed = new ArrayList<>();
+        decompressed = new ArrayList<>();
     }
 
-    void compressDict(){
-        compressed = new ArrayList<>();
+    ArrayList<String> compressDict(HashMap<String, ArrayList<Integer>> dict, char key){
+        this.key = key;
+        sortedMap = new TreeMap();
+        sortedMap.putAll(dict);
         String block = "";
         int sz = 0;
         for(Map.Entry<String,ArrayList<Integer>> entry : sortedMap.entrySet()) {
@@ -29,6 +29,7 @@ public class DictCompress {
                 block = "";
             }
         }
+        return compressed;
     }
 
     void addBlock(String s){
@@ -57,4 +58,45 @@ public class DictCompress {
         return 0;
     }
 
+    ArrayList<String> decompress(ArrayList<String> dict, char key){
+        this.key = key;
+        ArrayList<String> res = new ArrayList<>();
+        for (String s:
+             dict) {
+            String[] t = doBlock(s,key);
+            for (int i = 0; i < t.length; i++) {
+               decompressed.add(t[i]);
+            }
+        }
+        return decompressed;
+    }
+
+
+    String[] doBlock(String s, char key){
+        String pref = "";
+        int iter = 0;
+        for (; iter < s.length(); iter++) {
+            if(s.charAt(iter)!='*')pref+=s.charAt(iter);
+            else break;
+        }
+        iter++;
+        String res = pref;
+        while (iter<s.length()){
+            if(Character.isDigit(s.charAt(iter))){
+                String s2 ="";
+                s2 += s.charAt(iter);
+                iter++;
+                if(Character.isDigit(s.charAt(iter))){
+                    s2+=s.charAt(iter);//if sufix>9
+                }
+                int t = Integer.parseInt(s2);
+                res+=" "+pref+s.substring(++iter,iter+=t);
+            }
+            else {
+                res += s.charAt(iter);
+                iter++;
+            }
+        }
+        return res.split(" ");
+    }
 }
