@@ -109,6 +109,7 @@ public class DictCompress {
         return res.split(" ");
     }
 
+
     void writeFile() throws IOException {//sort and writes result in file
         long n = System.currentTimeMillis();
         FileWriter filewriter = new FileWriter(new File(+n+".txt"));

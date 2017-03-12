@@ -20,7 +20,7 @@ public class CompressIndex {
         comIndex = new HashMap<>();
     }
 
-    HashMap<String,byte[]> encodeInd(){
+    void encodeInd(){
         for(Map.Entry<String,ArrayList<Integer>> entry : sortedMap.entrySet()) {
             ArrayList<Integer> temp = entry.getValue();
             ArrayList<Integer> dec = new ArrayList<>();
@@ -30,7 +30,6 @@ public class CompressIndex {
             }
             comIndex.put(entry.getKey(),encode(dec));
         }
-        return comIndex;
     }
 
 

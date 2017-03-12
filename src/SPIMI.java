@@ -68,6 +68,14 @@ public class SPIMI {
     }
 
     void writeFile() throws IOException {//sort and writes result in file
+        CompressIndex t = new CompressIndex(d1);
+        t.encodeInd();
+        t.writeFile();
+
+        DictCompress t1 = new DictCompress(4);
+        t1.compressDict(d1,'~');
+        t1.writeFile();
+
         SortedMap<String, ArrayList<Integer>> sortedMap = new TreeMap();
         sortedMap.putAll(d1);
         long n = System.currentTimeMillis();
