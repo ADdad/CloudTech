@@ -14,6 +14,12 @@ public class DictCompress {
         decompressed = new ArrayList<>();
     }
 
+    DictCompress(int block_size){
+        this.block_size = block_size;
+        compressed = new ArrayList<>();
+        decompressed = new ArrayList<>();
+    }
+
     ArrayList<String> compressDict(HashMap<String, ArrayList<Integer>> dict, char key){
         this.key = key;
         sortedMap = new TreeMap();
