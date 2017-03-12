@@ -48,9 +48,9 @@ public class SPIMI {
 
         check(w,doc);
 
-        if(Runtime.getRuntime().freeMemory()<1000){
+        if(d1.size()>block_size)
             writeFile();
-        }
+
 
     }
 
