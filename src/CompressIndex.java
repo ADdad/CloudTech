@@ -17,6 +17,18 @@ public class CompressIndex {
         comIndex = new HashMap<>();
     }
 
+    void encodeArray(){
+        for(Map.Entry<String,ArrayList<Integer>> entry : sortedMap.entrySet()) {
+            ArrayList<Integer> temp = entry.getValue();
+            ArrayList<Integer> dec = new ArrayList<>();
+            dec.add(temp.get(0));
+            for (int i = 1; i < temp.size(); i++) {
+                dec.add(temp.get(i)-dec.get(i-1));
+            }
+            comIndex.put(entry.getKey(),encode(dec));
+        }
+    }
+
 
 
      private static byte[] encodeNumber(int n) {
@@ -34,7 +46,7 @@ public class CompressIndex {
         return rv;
     }
 
-    public static byte[] encode(List<Integer> numbers) {
+    public static byte[] encode(ArrayList<Integer> numbers) {
         ByteBuffer buf = ByteBuffer.allocate(numbers.size() * (Integer.SIZE / Byte.SIZE));
         for (Integer number : numbers) {
             buf.put(encodeNumber(number));
@@ -45,8 +57,8 @@ public class CompressIndex {
         return rv;
     }
 
-    public static List<Integer> decode(byte[] byteStream) {
-        List<Integer> numbers = new ArrayList<Integer>();
+    public static ArrayList<Integer> decode(byte[] byteStream) {
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
         int n = 0;
         for (byte b : byteStream) {
             if ((b & 0xff) < 128) {
