@@ -15,8 +15,6 @@ public class CompressIndex {
         sortedMap = new TreeMap();
         sortedMap.putAll(index);
         comIndex = new HashMap<>();
-
-
     }
 
 

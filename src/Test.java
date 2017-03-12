@@ -1,13 +1,10 @@
-
+import java.io.ByteArrayInputStream;
 
 public class Test
 {
 
     public static void main(String[] args) {
-        CompressIndex s = new CompressIndex();
-        byte[] mass = s.encodeNumber(5);
-        System.out.println(mass);
-        System.out.println(s.decode(mass));
+
     }
 
     void runSpimi(){
